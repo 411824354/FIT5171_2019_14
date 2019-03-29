@@ -1,5 +1,7 @@
 package rockets.model;
 
+import static org.apache.commons.lang3.Validate.notBlank;
+
 public abstract class Entity {
     private Long id;
 
@@ -10,6 +12,7 @@ public abstract class Entity {
     }
 
     public void setWikilink(String wikilink) {
+        notBlank(wikilink, "wikilink cannot be null or empty");
         this.wikilink = wikilink;
     }
 
@@ -19,6 +22,11 @@ public abstract class Entity {
     }
 
     public void setId(Long id) {
-        this.id = id;
+        if (id == null)
+            throw new NullPointerException("Id cannot be null");
+        else if (id < 0)
+            throw new IllegalArgumentException("id cannot be negative");
+        else
+            this.id = id;
     }
 }
