@@ -46,7 +46,7 @@ public class PayloadTest {
 
     @DisplayName("should throw exception when pass null to setMission function")
     @Test
-    public void shouldThrowExceptionWhenSetEmailToNull() {
+    public void shouldThrowExceptionWhenSetMissionToNull() {
         NullPointerException exception = assertThrows(NullPointerException.class, () -> target.setMission(null));
         assertEquals("mission cannot be null or empty", exception.getMessage());
     }
@@ -54,14 +54,14 @@ public class PayloadTest {
     @DisplayName("should throw exception when pass a empty mission to setMission function")
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "  "})
-    public void shouldThrowExceptionWhenSetEmailToEmpty(String mission) {
+    public void shouldThrowExceptionWhenSetMissionToEmpty(String mission) {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> target.setMission(mission));
         assertEquals("mission cannot be null or empty", exception.getMessage());
     }
 
     @DisplayName("should return true when two payloads have the same name and type")
     @Test
-    public void shouldReturnTrueWhenUsersHaveSameEmail() {
+    public void shouldReturnTrueWhenUsersHaveSameNameANDType() {
         Payload anotherPayload = new Payload("GSAT-31", "Spacecraft");
         assertTrue(target.equals(anotherPayload));
     }
@@ -69,7 +69,7 @@ public class PayloadTest {
     @DisplayName("should return false when two payloads have different name and type")
     @ParameterizedTest
     @ValueSource(strings = {"IRNSS-1I,Spacecraft","SOYUZ MS-12,satellite","GSAT-31,satellite"})
-    public void shouldReturnFalseWhenUsersHaveDifferentEmails(String payloadInfo) {
+    public void shouldReturnFalseWhenUsersHaveDifferentNameANDType(String payloadInfo) {
         String[] payloadInfos = payloadInfo.split(",");
         Payload anotherPayload = new Payload(	payloadInfos[0], payloadInfos[1]);
         assertFalse(target.equals(anotherPayload));
