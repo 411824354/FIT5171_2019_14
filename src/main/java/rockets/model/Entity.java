@@ -7,6 +7,7 @@ public abstract class Entity {
 
     private String wikilink;
 
+
     public String getWikilink() {
         return wikilink;
     }
@@ -29,4 +30,5 @@ public abstract class Entity {
         else
             this.id = id;
     }
+
 }

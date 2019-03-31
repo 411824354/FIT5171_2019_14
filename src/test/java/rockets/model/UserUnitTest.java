@@ -59,4 +59,48 @@ public class UserUnitTest {
         anotherUser.setEmail("def@example.com");
         assertFalse(target.equals(anotherUser));
     }
+
+    @DisplayName("should return exception when pass the string with not email formate")
+    @ParameterizedTest
+    @ValueSource(strings = {"sldffjsldj","sdfsdf@sdfsd123"})
+    public void shouldThrowExeptionWhenWorngEmailFormate (String email){
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> target.setEmail(email));
+        assertEquals("input must be email format", exception.getMessage());
+    }
+
+    @DisplayName("the password contains uppercase and lowercase letters and Numbers and whether they are in bits 6-12")
+    @ParameterizedTest
+    @ValueSource(strings = {"sdfsdfds","23324","sdfff2342","sdf3332sdf","dsfsdfdsff8ds8f789d7f98sf798ddfs8s9f87"})
+    public void passwordShouldMatchTheFormat(String password){
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,()->target.setPassword(password));
+        assertEquals("illegal password", exception.getMessage());
+
+    }
+
+    @DisplayName("First name not blank")
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "  "})
+    public void shouldThrowExceptionWhenSetFistNameToEmpty(String firstName) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> target.setFirstName(firstName));
+        assertEquals("first name can not be null or empty", exception.getMessage());
+    }
+
+
+    @DisplayName("Last name not blank")
+    @ParameterizedTest
+    @ValueSource(strings = {"", " ", "  "})
+    public void shouldThrowExceptionWhenSetLastNameToEmpty(String lastName) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> target.setLastName(lastName));
+        assertEquals("last name can not be null or empty", exception.getMessage());
+    }
+
+
+
+
+
+
+
+
+
+
 }
